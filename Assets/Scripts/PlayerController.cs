@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private bool isFacingRight = true;
+
+    private bool isJumping;
     
     void Start()
     {
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+        Jump();
     }
 
     private void Move()
@@ -50,5 +53,21 @@ public class PlayerController : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    private void Jump()
+    {
+        if(groundDetector.isGrounded)
+        {
+            isJumping = false;
+
+            if(Input.GetKey(KeyCode.Space))
+            {
+                isJumping = true;
+                groundDetector.isGrounded = false;
+                anim.SetTrigger("OnJump");
+                rb.AddForce(Vector2.up * playerData.jumpForce, ForceMode2D.Impulse);
+            }
+        }
     }
 }
