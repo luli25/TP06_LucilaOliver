@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
 
     private bool isJumping;
+    private bool isCrouching;
     
     void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
+        Crouch();
     }
 
     private void Move()
@@ -61,13 +63,28 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
 
-            if(Input.GetKey(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space))
             {
                 isJumping = true;
                 groundDetector.isGrounded = false;
                 anim.SetTrigger("OnJump");
                 rb.AddForce(Vector2.up * playerData.jumpForce, ForceMode2D.Impulse);
             }
+        }
+    }
+
+    private void Crouch()
+    {
+        isCrouching = false;
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            isCrouching = true;
+            anim.SetBool("isCrouching", true);
+
+        } else if(Input.GetKeyUp(KeyCode.S))
+        {
+            isCrouching = false;
+            anim.SetBool("isCrouching", false);
         }
     }
 }
