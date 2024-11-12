@@ -31,11 +31,24 @@ public class Bat : MonoBehaviour
     {
         if(transform.position.x < target.x)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = false;
         }
         else
         {
-            spriteRenderer.flipX= false;
+            spriteRenderer.flipX= true;
+        }
+    }
+
+    public Vector3 InitialPoint
+    {
+        get
+        {
+            return initialPoint;
+        }
+
+        set
+        {
+            initialPoint = value;
         }
     }
 }
