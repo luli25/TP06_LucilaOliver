@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,17 +14,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GroundDetector groundDetector;
 
+    [SerializeField]
+    private Slider playerHealthBar;
+
+    [SerializeField]
+    private HealthBarConfig healthBarConfig;
+
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private bool isFacingRight = true;
 
     private bool isJumping;
     private bool isCrouching;
-    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        playerData.currentHealth = playerData.maxHealth;
     }
 
     // Update is called once per frame
@@ -86,5 +95,20 @@ public class PlayerController : MonoBehaviour
             isCrouching = false;
             anim.SetBool("isCrouching", false);
         }
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+        playerData.currentHealth -= damageAmount;
+        Debug.Log(playerData.currentHealth);
+        playerHealthBar.value = playerData.currentHealth;
+
+        healthBarConfig.SetHealth(playerData.currentHealth);
+
+        if(playerData.currentHealth <= 0)
+        {
+            Debug.Log("player dead!");
+        }
+        
     }
 }
