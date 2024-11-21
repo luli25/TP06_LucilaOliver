@@ -10,4 +10,5 @@ public class PlayerData : ScriptableObject
     public int lives = 3;
     public int currentLives = 0;
     public float damage = 20f;
+    public float climbSpeed = 5f;
 }
