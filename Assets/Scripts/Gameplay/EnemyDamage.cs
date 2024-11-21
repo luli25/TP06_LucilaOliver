@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyDamage : MonoBehaviour
 {
@@ -10,9 +11,15 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
 
+    [SerializeField]
+    private HealthBarConfig healthBarConfig;
+
+    [SerializeField]
+    private Slider health;
+
     void Start()
     {
-        
+        enemyData.health = enemyData.maxHealth;
     }
 
     // Update is called once per frame

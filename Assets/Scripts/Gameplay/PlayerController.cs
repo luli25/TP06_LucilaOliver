@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private HealthBarConfig healthBarConfig;
 
+    private EnemyDamage enemy;
+
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private bool isFacingRight = true;
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        enemy = GetComponent<EnemyDamage>();
 
         playerData.currentHealth = playerData.maxHealth;
     }
@@ -100,7 +103,6 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         playerData.currentHealth -= damageAmount;
-        Debug.Log(playerData.currentHealth);
         playerHealthBar.value = playerData.currentHealth;
 
         healthBarConfig.SetHealth(playerData.currentHealth);

@@ -9,4 +9,5 @@ public class PlayerData : ScriptableObject
     public float maxHealth = 100F;
     public int lives = 3;
     public int currentLives = 0;
+    public float damage = 20f;
 }
