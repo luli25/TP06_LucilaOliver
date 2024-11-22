@@ -3,8 +3,15 @@ using UnityEngine.UI;
 
 public class HealthBarConfig : MonoBehaviour
 {
-    [SerializeField]
+    
     private Slider healthBarSlider;
+
+    private void Start()
+    {
+        {
+            healthBarSlider = GetComponentInChildren<Slider>();
+        }
+    }
 
     public void SetMaxHealth(float maxHealth)
     {
