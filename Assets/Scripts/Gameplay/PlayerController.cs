@@ -119,48 +119,39 @@ public class PlayerController : MonoBehaviour
         float verticalInput = 0;
         if (Input.GetKey(KeyCode.W))
         {
-            verticalInput = 1; // Move up
+            verticalInput = 1;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            verticalInput = -1; // Move down
+            verticalInput = -1;
         }
 
         if (box.IsTouchingLayers(LayerMask.GetMask("Ladder")) && verticalInput != 0)
         {
-            // Debugging to check verticalInput value
-            Debug.Log("Vertical Input: " + verticalInput);
-
             Vector2 climbingSpeed = new Vector2(rb.velocity.x, verticalInput * playerData.climbSpeed);
-            Debug.Log("Climbing Speed: " + climbingSpeed);
 
-            // Apply climbing speed and disable gravity
             rb.isKinematic = true;
             rb.velocity = climbingSpeed;
             rb.gravityScale = 0;
 
-            // Trigger climbing animation
             anim.SetBool("Climbing", true);
             climbing = true;
 
-            if (verticalInput == 0) 
-            { 
-                rb.velocity = new Vector2(rb.velocity.x, 0); 
+            if (verticalInput == 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
             }
         }
         else
         {
-            // Re-enable gravity when not climbing
             rb.gravityScale = initialGravity;
             rb.isKinematic = false;
             anim.SetBool("Climbing", false);
             climbing = false;
         }
 
-        // If the player is on the ground, disable climbing
         if (groundDetector.isGrounded)
         {
-            //rb.isKinematic = false;
             climbing = false;
         }
     }
