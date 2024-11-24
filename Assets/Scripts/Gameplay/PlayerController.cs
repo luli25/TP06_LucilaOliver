@@ -169,8 +169,8 @@ public class PlayerController : MonoBehaviour
         if(playerData.currentHealth <= 0)
         {
             Debug.Log("player dead!");
-            playerData.currentHealth--;
-            Debug.Log(playerData.currentHealth);
+            playerData.currentLives--;
+            Debug.Log(playerData.currentLives);
 
         }
         
