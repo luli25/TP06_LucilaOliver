@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         
 
         playerData.currentHealth = playerData.maxHealth;
+        playerData.currentLives = playerData.lives;
         initialGravity = rb.gravityScale;
     }
 
@@ -160,6 +161,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         playerData.currentHealth -= damageAmount;
+        anim.Play("Hurt", 0);
         playerHealthBar.value = playerData.currentHealth;
 
         healthBarConfig.SetHealth(playerData.currentHealth);
@@ -167,6 +169,9 @@ public class PlayerController : MonoBehaviour
         if(playerData.currentHealth <= 0)
         {
             Debug.Log("player dead!");
+            playerData.currentHealth--;
+            Debug.Log(playerData.currentHealth);
+
         }
         
     }
