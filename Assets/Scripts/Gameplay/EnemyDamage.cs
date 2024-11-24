@@ -36,17 +36,4 @@ public class EnemyDamage : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damageAmount)
-    {
-        enemyData.health -= damageAmount;
-        health.value = enemyData.health;
-
-        healthBarConfig.SetHealth(enemyData.health);
-
-        if (enemyData.health <= 0)
-        {
-            Destroy(gameObject);
-        }
-
-    }
 }

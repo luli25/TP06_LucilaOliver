@@ -18,6 +18,9 @@ public class PlayerCheck : MonoBehaviour
     [SerializeField]
     private HealthBarConfig healthBarConfig;
 
+    [SerializeField]
+    private GameObject enemyDeathEffect;
+
     private void Start()
     {
         enemyData.health = enemyData.maxHealth;
@@ -27,8 +30,6 @@ public class PlayerCheck : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("HeadCheck"))
         {
-            //Destroy(transform.parent.gameObject);
-
             enemyData.health -= playerData.damage;
             enemyHealth.value = enemyData.health;
 
@@ -36,7 +37,8 @@ public class PlayerCheck : MonoBehaviour
 
             if (enemyData.health <= 0)
             {
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
+                Instantiate(enemyDeathEffect, transform.position, Quaternion.identity);
             }
 
         }
