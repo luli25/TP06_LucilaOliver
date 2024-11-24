@@ -34,7 +34,7 @@ public class Frog : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, points[randomNumber].position, enemyData.speed * Time.deltaTime);
 
-        animator.Play("Jump", 0);
+        animator.Play("Walk", 0);
 
         if(Vector2.Distance(transform.position, points[randomNumber].position) < minDistance )
         {
