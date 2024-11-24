@@ -26,9 +26,9 @@ public class PlayerCheck : MonoBehaviour
         enemyData.health = enemyData.maxHealth;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collision.gameObject.CompareTag("HeadCheck"))
+        if(collider.gameObject.CompareTag("HeadCheck"))
         {
             enemyData.health -= playerData.damage;
             enemyHealth.value = enemyData.health;
