@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     private float initialGravity;
     private bool climbing;
 
+    public bool isDead;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -46,6 +48,8 @@ public class PlayerController : MonoBehaviour
         playerData.currentHealth = playerData.maxHealth;
         playerData.currentLives = playerData.lives;
         initialGravity = rb.gravityScale;
+
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -168,11 +172,25 @@ public class PlayerController : MonoBehaviour
 
         if(playerData.currentHealth <= 0)
         {
-            Debug.Log("player dead!");
-            playerData.currentLives--;
-            Debug.Log(playerData.currentLives);
-
+            Die();
         }
         
+    }
+
+    private void Die()
+    {
+        playerData.currentLives--;
+        isDead = true;
+    }
+
+    private void Heal(int amount)
+    {
+        playerData.currentHealth += amount;
+        healthBarConfig.SetHealth(playerData.currentHealth);
+
+        if(playerData.currentHealth > playerData.maxHealth)
+        {
+            playerData.currentHealth = playerData.maxHealth;
+        }
     }
 }
