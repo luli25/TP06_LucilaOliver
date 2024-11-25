@@ -15,11 +15,6 @@ public class LivesCounter : MonoBehaviour
     {
         playerData.currentLives--;
         lifeImages[playerData.currentLives].enabled = false;
-
-        if (playerData.currentLives == 0)
-        {
-            Debug.Log("Game Over!");
-        }
     }
 
     private void Update()

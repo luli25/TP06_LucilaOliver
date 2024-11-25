@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,8 @@ public class PlayerCheck : MonoBehaviour
     [SerializeField]
     private GameObject enemyDeathEffect;
 
+    public List<LootTable> loot = new List<LootTable>();
+
     private void Start()
     {
         enemyData.health = enemyData.maxHealth;
@@ -28,7 +31,7 @@ public class PlayerCheck : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.CompareTag("HeadCheck"))
+        if (collider.gameObject.CompareTag("HeadCheck"))
         {
             enemyData.health -= playerData.damage;
             enemyHealth.value = enemyData.health;
@@ -37,6 +40,14 @@ public class PlayerCheck : MonoBehaviour
 
             if (enemyData.health <= 0)
             {
+                foreach (LootTable table in loot)
+                {
+                    if (Random.Range(0f, 100f) > table.dropChance)
+                    {
+                        DropLoot(table.itemPrefab);
+                    }
+                }
+
                 Destroy(transform.parent.gameObject);
                 Instantiate(enemyDeathEffect, transform.position, Quaternion.identity);
             }
@@ -44,5 +55,11 @@ public class PlayerCheck : MonoBehaviour
         }
     }
 
-
+    private void DropLoot(GameObject loot)
+    {
+        if (loot)
+        {
+            GameObject droppedLoot = Instantiate(loot, transform.position, Quaternion.identity);
+        }
+    }
 }

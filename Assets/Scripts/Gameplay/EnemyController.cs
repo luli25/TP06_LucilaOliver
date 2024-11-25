@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyDamage : MonoBehaviour
 {
     [SerializeField]
     private EnemyData enemyData;
@@ -20,12 +20,6 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         enemyData.health = enemyData.maxHealth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
