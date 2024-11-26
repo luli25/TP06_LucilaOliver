@@ -193,4 +193,12 @@ public class PlayerController : MonoBehaviour
             playerData.currentHealth = playerData.maxHealth;
         }
     }
+
+    private void RestartGame()
+    {
+        if(playerData.currentLives <= 0)
+        {
+            GameManager.Instance.RestartGame();
+        }
+    }
 }
